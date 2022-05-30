@@ -1,0 +1,25 @@
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 320px;
+}
+
+.filters-container {
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+}
+
+table {
+  width: 100%;
+  min-width: 768px;
+}
+
+.table-container {
+  width: 100%;
+  overflow: auto;
+}

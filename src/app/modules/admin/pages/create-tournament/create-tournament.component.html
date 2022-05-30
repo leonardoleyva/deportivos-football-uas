@@ -1,0 +1,102 @@
+<h1>Arma tu torneo</h1>
+
+<div class="input-section">
+  <h2>Conócelo como...</h2>
+  <mat-form-field class="input" appearance="fill">
+    <mat-label>Nombre del torneo</mat-label>
+    <input matInput placeholder="" [(ngModel)]="form.tournamentName">
+  </mat-form-field>
+</div>
+
+<div class="input-section">
+  <h2>Dirigido para</h2>
+  <div class="input-section-grid">
+    <mat-form-field class="select" appearance="fill">
+      <mat-label>Categoría</mat-label>
+      <mat-select [(ngModel)]="form.category">
+        <mat-option *ngFor="let category of fieldsetData.categories" [value]="category._id">
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="select" appearance="fill">
+      <mat-label>Ramas</mat-label>
+      <mat-select [formControl]="branchesFC" multiple [(ngModel)]="form.branches">
+        <mat-option *ngFor="let branch of fieldsetData.branches" [value]="branch._id">{{branch.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="select" appearance="fill">
+      <mat-label>Tipo de torneo</mat-label>
+      <mat-select [(ngModel)]="form.type">
+        <mat-option *ngFor="let type of fieldsetData.types" [value]="type._id">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="input-section">
+  <h2>Realización en</h2>
+  <mat-form-field class="input" appearance="fill">
+    <mat-label>Ciudad</mat-label>
+    <mat-select [(ngModel)]="form.city" name="city" (selectionChange)="handleChangeCity($event)">
+      <mat-option *ngFor="let city of fieldsetData.cities" [value]="city._id">
+        {{city.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="input-section-grid">
+    <mat-form-field class="select" appearance="fill">
+      <mat-label>Lugares</mat-label>
+      <mat-select [formControl]="placesFC" multiple [(ngModel)]="form.places">
+        <mat-option *ngFor="let place of fieldsetData.places" [value]="place._id">{{place.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="select" appearance="fill">
+      <mat-label>Fechas</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Inicio" [(ngModel)]="form.startDate">
+        <input matEndDate placeholder="Finzalización" [(ngModel)]="form.endDate">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <mat-form-field class="select" appearance="fill">
+      <mat-label>Horario</mat-label>
+      <input matInput placeholder="" [(ngModel)]="form.hours">
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="input-section">
+  <h2>Interventores</h2>
+  <div class="input-section-grid">
+    <mat-form-field class="select" appearance="fill">
+      <mat-label>Administradores</mat-label>
+      <mat-select [formControl]="adminsFC" multiple [(ngModel)]="form.admins">
+        <mat-option *ngFor="let admin of fieldsetData.admins" [value]="admin._id">{{admin.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="select" appearance="fill">
+      <mat-label>Entrenadores</mat-label>
+      <mat-select [formControl]="coachesFC" multiple [(ngModel)]="form.coaches">
+        <mat-option *ngFor="let coach of fieldsetData.coaches" [value]="coach._id">{{coach.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="select" appearance="fill">
+      <mat-label>Árbitros</mat-label>
+      <mat-select [formControl]="refereesFC" multiple [(ngModel)]="form.referees">
+        <mat-option *ngFor="let referee of fieldsetData.referees" [value]="referee._id">{{referee.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="form-actions-container">
+  <div>
+    <button mat-stroked-button color="primary" (click)="handleCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" [disabled]="isFormDisabled()" (click)="handleSubmit()">Crear</button>
+  </div>
+</div>

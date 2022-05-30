@@ -1,0 +1,44 @@
+<div class="header">
+  <h1>Torneos</h1>
+  
+  <a [routerLink]="['/admin/tournament/create']"><button mat-raised-button color="primary">Nuevo torneo</button></a>
+</div>
+
+<div class="filters-container">
+  <mat-form-field class="search-input" appearance="fill">
+    <mat-label>Buscar</mat-label>
+    <input matInput placeholder="Nombre del torneo" value="">
+  </mat-form-field>
+</div>
+
+<div class="table-container">
+  <table mat-table [dataSource]="tournaments" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Torneo</th>
+      <td mat-cell *matCellDef="let tournament"> {{tournament.name}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Tipo</th>
+      <td mat-cell *matCellDef="let tournament"> {{tournament.type.name}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="categories">
+      <th mat-header-cell *matHeaderCellDef>Categorías</th>
+      <td mat-cell *matCellDef="let tournament"> {{tournament.mixedCategories[0].name}} ... </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="places">
+      <th mat-header-cell *matHeaderCellDef>Lugares</th>
+      <td mat-cell *matCellDef="let tournament"> {{tournament.places[0].name}} ... </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="initDate">
+      <th mat-header-cell *matHeaderCellDef>Fecha de inicio</th>
+      <td mat-cell *matCellDef="let tournament"> {{tournament.dates.init}} </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

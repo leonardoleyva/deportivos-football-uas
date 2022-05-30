@@ -1,0 +1,22 @@
+.main {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  overflow: hidden;
+  width: 100vw;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 64px calc(100% - 64px);
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.main-content {
+  padding: 3em 48px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: calc(100% - 48px - 48px);
+}
