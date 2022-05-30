@@ -18,6 +18,7 @@ import { SidebarComponent } from './core/components/sidebar/sidebar.component';
 import { MainLayoutComponent } from './core/layouts/main-layout/main-layout.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CreateTournamentComponent } from './modules/admin/pages/create-tournament/create-tournament.component';
+import { TournamentDetailComponent } from './modules/admin/pages/tournament-detail/tournament-detail.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CreateTournamentComponent } from './modules/admin/pages/create-tourname
     SidebarComponent,
     MainLayoutComponent,
     CreateTournamentComponent,
+    TournamentDetailComponent,
   ],
   imports: [
     BrowserModule,
