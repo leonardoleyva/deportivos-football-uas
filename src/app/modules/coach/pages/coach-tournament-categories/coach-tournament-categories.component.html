@@ -1,0 +1,11 @@
+<h1>Categorías del torneo: {{tournament?.name}}</h1>
+
+<p class="subtitle">Registra un <span>equipo</span> en alguna de las siguiente categorías</p>
+
+<mat-card>
+  <mat-chip-list aria-label="Mixed categories">
+    <a *ngFor="let category of tournament?.mixedCategories" [routerLink]="['/admin/tournament/' + tournamentIdParam + '/category/' + category._id + '/team/create']">
+      <mat-chip selected="{{ category.status === 'active' }}">{{category.name}}</mat-chip>
+    </a>
+  </mat-chip-list>
+</mat-card>

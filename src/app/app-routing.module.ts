@@ -5,6 +5,7 @@ import { EditTournamentComponent } from './modules/admin/pages/edit-tournament/e
 import { ManageTreeTeamsComponent } from './modules/admin/pages/manage-tree-teams/manage-tree-teams.component';
 import { TournamentDetailComponent } from './modules/admin/pages/tournament-detail/tournament-detail.component';
 import { TournamentsComponent } from './modules/admin/pages/tournaments/tournaments.component';
+import { CoachTournamentCategoriesComponent } from './modules/coach/pages/coach-tournament-categories/coach-tournament-categories.component';
 import { CoachTournamentsComponent } from './modules/coach/pages/coach-tournaments/coach-tournaments.component';
 
 const routes: Routes = [
@@ -23,7 +24,13 @@ const routes: Routes = [
   },
   {
     path: 'coach',
-    children: [{ path: 'tournaments', component: CoachTournamentsComponent }],
+    children: [
+      { path: 'tournaments', component: CoachTournamentsComponent },
+      {
+        path: 'tournament/:id/categories',
+        component: CoachTournamentCategoriesComponent,
+      },
+    ],
   },
 ];
 
