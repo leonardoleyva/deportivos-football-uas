@@ -59,3 +59,19 @@ export interface Tournament {
   readonly mixedCategories: MixedCategory[]
   readonly status: TournamentStatus
 }
+
+export interface Player {
+  readonly _id: string
+  readonly name: string
+  readonly curp: String
+  readonly playerNumber: number
+}
+
+export interface Team {
+  readonly _id: string
+  readonly name: string
+  readonly teamLogo: string
+  readonly tournamentId: string
+  readonly categoryId: string
+  readonly players: Player[]
+}

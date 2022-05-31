@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CreateTournamentComponent } from './modules/admin/pages/create-tournament/create-tournament.component';
 import { TournamentDetailComponent } from './modules/admin/pages/tournament-detail/tournament-detail.component';
 import { EditTournamentComponent } from './modules/admin/pages/edit-tournament/edit-tournament.component';
+import { ManageTreeTeamsComponent } from './modules/admin/pages/manage-tree-teams/manage-tree-teams.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { EditTournamentComponent } from './modules/admin/pages/edit-tournament/e
     CreateTournamentComponent,
     TournamentDetailComponent,
     EditTournamentComponent,
+    ManageTreeTeamsComponent,
   ],
   imports: [
     BrowserModule,

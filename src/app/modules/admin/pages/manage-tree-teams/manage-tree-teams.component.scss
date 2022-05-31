@@ -1,0 +1,16 @@
+.tournament-tree {
+  display: flex;
+  gap: 40px;
+  margin-top: 3em;
+  overflow: auto;
+  width: 100%;
+}
+
+.teams-to-drag-and-drop {
+  border: 2px dashed #0A90EF;
+  height: 560px;
+  max-height: 560px;
+  min-width: calc(320px - 1.25em - 1.25em);
+  overflow: auto;
+  padding: 1.5em 1.25em;
+}

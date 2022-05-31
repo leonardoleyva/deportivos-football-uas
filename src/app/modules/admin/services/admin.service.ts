@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Place, Tournament } from 'src/app/shared/tournament';
+import { Place, Team, Tournament } from 'src/app/shared/tournament';
 import { environment } from 'src/environments/environment';
 import {
   CreateTournamentPayload,
@@ -57,6 +57,13 @@ export class AdminService {
     return this.http.put<Tournament>(
       `${this._API_URL_SERVICE_MODULE}/tournament/${tournamentId}`,
       payload
+    );
+  }
+
+  // TODO: Apply correct sub-module URL when API is updated its routes
+  getTeams(tournamentId: string, mixedCategoryId: string): Observable<Team[]> {
+    return this.http.get<Team[]>(
+      `${environment.API_URL}/coach/tournament/${tournamentId}/category/${mixedCategoryId}/teams`
     );
   }
 }

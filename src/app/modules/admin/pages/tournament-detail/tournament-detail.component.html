@@ -70,7 +70,9 @@
 
       <div class="tournament-officials">
         <mat-chip-list aria-label="Mixed categories">
-          <mat-chip *ngFor="let category of tournament?.mixedCategories" selected="{{ category.status === 'active' }}">{{category.name}}</mat-chip>
+          <a *ngFor="let category of tournament?.mixedCategories" [routerLink]="['/admin/tournament/' + tournamentIdParam + '/category/' + category._id + '/teams/manage']">
+            <mat-chip selected="{{ category.status === 'active' }}">{{category.name}}</mat-chip>
+          </a>
         </mat-chip-list>
       </div>
     </div>
