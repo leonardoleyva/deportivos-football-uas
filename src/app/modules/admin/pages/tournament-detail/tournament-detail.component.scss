@@ -3,7 +3,7 @@
   display: flex;
   gap: 16px;
 
-  & > img {
+  & > a > img {
     cursor: pointer;
     height: 32px;
     user-select: none;

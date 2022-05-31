@@ -12,6 +12,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { MainLayoutComponent } from './core/layouts/main-layout/main-layout.comp
 import { MatIconModule } from '@angular/material/icon';
 import { CreateTournamentComponent } from './modules/admin/pages/create-tournament/create-tournament.component';
 import { TournamentDetailComponent } from './modules/admin/pages/tournament-detail/tournament-detail.component';
+import { EditTournamentComponent } from './modules/admin/pages/edit-tournament/edit-tournament.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { TournamentDetailComponent } from './modules/admin/pages/tournament-deta
     MainLayoutComponent,
     CreateTournamentComponent,
     TournamentDetailComponent,
+    EditTournamentComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import { TournamentDetailComponent } from './modules/admin/pages/tournament-deta
     MatSnackBarModule,
     MatCardModule,
     MatChipsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

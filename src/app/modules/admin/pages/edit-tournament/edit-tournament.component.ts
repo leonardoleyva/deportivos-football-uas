@@ -1,19 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Place } from 'src/app/shared/tournament';
-import { parseDateToMMDDYYYY } from 'src/app/shared/utils';
+import { Place, Tournament } from 'src/app/shared/tournament';
+import { parseDateToMMDDYYYY, parseMMDDYYYYtoDate } from 'src/app/shared/utils';
 import { AdminService } from '../../services/admin.service';
 import { FieldsetDataResponse } from '../../services/type';
 
 @Component({
-  selector: 'app-create-tournament',
-  templateUrl: './create-tournament.component.html',
-  styleUrls: ['./create-tournament.component.scss'],
+  selector: 'app-edit-tournament',
+  templateUrl: './edit-tournament.component.html',
+  styleUrls: ['./edit-tournament.component.scss'],
 })
-export class CreateTournamentComponent implements OnInit, OnDestroy {
+export class EditTournamentComponent implements OnInit {
   branchesFC = new FormControl();
   placesFC = new FormControl();
   adminsFC = new FormControl();
@@ -30,7 +30,20 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
     referees: [],
   };
 
-  form = {
+  form: {
+    tournamentName: string;
+    category: string;
+    branches: string[];
+    type: string;
+    city: string;
+    places: string[];
+    startDate: string | Date;
+    endDate: string | Date;
+    hours: string;
+    admins: string[];
+    coaches: string[];
+    referees: string[];
+  } = {
     tournamentName: '',
     category: '',
     branches: [],
@@ -45,17 +58,38 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
     referees: [],
   };
 
+  tournamentIdParam: string;
+  tournament: Tournament | undefined;
+
   fieldsetDataSubscription: Subscription | undefined;
   placesSubscription: Subscription | undefined;
+  getTournamentSubscription: Subscription | undefined;
   createTournamentSubscription: Subscription | undefined;
 
   constructor(
     private route: Router,
+    private activatedRoute: ActivatedRoute,
     private adminService: AdminService,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+    this.tournamentIdParam =
+      this.activatedRoute.snapshot.paramMap.get('id') ?? '';
+  }
 
   ngOnInit(): void {
+    this.branchesFC.disable()
+    this.loadFieldsetData();
+    this.loadTournamentData();
+  }
+
+  ngOnDestroy(): void {
+    this.fieldsetDataSubscription?.unsubscribe();
+    this.placesSubscription?.unsubscribe();
+    this.getTournamentSubscription?.unsubscribe();
+    this.createTournamentSubscription?.unsubscribe();
+  }
+
+  loadFieldsetData() {
     this.fieldsetDataSubscription = this.adminService
       .getTournamentFieldSetData()
       .subscribe((data) => {
@@ -71,10 +105,36 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
-    this.fieldsetDataSubscription?.unsubscribe();
-    this.placesSubscription?.unsubscribe();
-    this.createTournamentSubscription?.unsubscribe();
+  loadPlacesData(cityId: string) {
+    this.placesSubscription = this.adminService
+      .getTournamentPlaces(cityId)
+      .subscribe((data) => {
+        this.fieldsetData.places = [...data.places];
+      });
+  }
+
+  loadTournamentData() {
+    this.getTournamentSubscription = this.adminService
+      .getOneTournament(this.tournamentIdParam)
+      .subscribe((data) => {
+        this.tournament = data;
+        this.form = {
+          tournamentName: data.name,
+          category: data.category._id,
+          branches: data.branches.map(({ _id }) => _id) as never[],
+          type: data.type._id,
+          city: data.city._id,
+          places: data.places.map(({ _id }) => _id) as never[],
+          startDate: parseMMDDYYYYtoDate(data.dates.init),
+          endDate: parseMMDDYYYYtoDate(data.dates.final),
+          hours: data.hours,
+          admins: data.officials.admins.map(({ _id }) => _id) as never[],
+          coaches: data.officials.coaches.map(({ _id }) => _id) as never[],
+          referees: data.officials.referees.map(({ _id }) => _id) as never[],
+        };
+
+        this.loadPlacesData(data.city._id)
+      });
   }
 
   handleChangeCity({ value }: { source: any; value: string }) {
@@ -86,7 +146,7 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
   }
 
   handleCancel() {
-    this.redirectToTournaments();
+    this.redirectToDetail();
   }
 
   handleSubmit() {
@@ -104,12 +164,10 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
       coaches,
       referees,
     } = this.form;
-    const init = parseDateToMMDDYYYY(startDate);
-    const final = parseDateToMMDDYYYY(endDate);
+    const init = parseDateToMMDDYYYY(startDate.toString());
+    const final = parseDateToMMDDYYYY(endDate.toString());
     const payload = {
       name,
-      category,
-      branches,
       type,
       dates: { init, final },
       city,
@@ -121,20 +179,20 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
     };
 
     this.createTournamentSubscription = this.adminService
-      .createTournament(payload)
+      .editTournament(this.tournamentIdParam, payload)
       .subscribe(() => {
-        this.snackBar.open('Torneo creado exitosamente', 'X', {
+        this.snackBar.open('Torneo actualizado exitosamente', 'X', {
           duration: 5000,
           horizontalPosition: 'center',
           verticalPosition: 'top',
           panelClass: ['snack-bar-success'],
         });
-        this.redirectToTournaments();
+        this.redirectToDetail();
       });
   }
 
-  redirectToTournaments() {
-    this.route.navigate(['/admin/tournaments']);
+  redirectToDetail() {
+    this.route.navigate([`/admin/tournament/${this.tournamentIdParam}/detail`]);
   }
 
   isFormDisabled() {

@@ -1,7 +1,9 @@
 <header class="header">
   <h1>Detalle del torneo</h1>
 
-  <img src="assets/images/edit-icon.png" alt="Edit tournament detail">
+  <a [routerLink]="['/admin/tournament/' + tournamentIdParam + '/edit']">
+    <img src="assets/images/edit-icon.png" alt="Edit tournament detail">
+  </a>
 </header>
 
 <div class="tournament-detail-cards">

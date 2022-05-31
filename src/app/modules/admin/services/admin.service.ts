@@ -3,7 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Place, Tournament } from 'src/app/shared/tournament';
 import { environment } from 'src/environments/environment';
-import { CreateTournamentPayload, FieldsetDataResponse } from './type';
+import {
+  CreateTournamentPayload,
+  FieldsetDataResponse,
+  UpdateTournamentPayload,
+} from './type';
 
 @Injectable({
   providedIn: 'root',
@@ -42,6 +46,16 @@ export class AdminService {
   createTournament(payload: CreateTournamentPayload): Observable<Tournament> {
     return this.http.post<Tournament>(
       `${this._API_URL_SERVICE_MODULE}/tournament`,
+      payload
+    );
+  }
+
+  editTournament(
+    tournamentId: string,
+    payload: UpdateTournamentPayload
+  ): Observable<Tournament> {
+    return this.http.put<Tournament>(
+      `${this._API_URL_SERVICE_MODULE}/tournament/${tournamentId}`,
       payload
     );
   }
