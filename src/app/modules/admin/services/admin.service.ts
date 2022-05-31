@@ -21,6 +21,12 @@ export class AdminService {
     );
   }
 
+  getOneTournament(tournamentId: string): Observable<Tournament> {
+    return this.http.get<Tournament>(
+      `${this._API_URL_SERVICE_MODULE}/tournament/${tournamentId}`
+    );
+  }
+
   getTournamentFieldSetData(): Observable<FieldsetDataResponse> {
     return this.http.get<FieldsetDataResponse>(
       `${this._API_URL_SERVICE_MODULE}/tournament/fieldset-data/all`

@@ -1,1 +1,76 @@
-<p>tournament-detail works!</p>
+<header class="header">
+  <h1>Detalle del torneo</h1>
+
+  <img src="assets/images/edit-icon.png" alt="Edit tournament detail">
+</header>
+
+<div class="tournament-detail-cards">
+  <mat-card>
+    <div class="tournament-detail-card-content">
+      <h2>Información base</h2>
+      <p class="tournament-name">{{tournament?.name}}</p>
+
+      <div class="tournament-categories">
+        <p>Categorías:</p>
+        <ul>
+          <li *ngFor="let category of tournament?.mixedCategories">{{category.name}}</li>
+        </ul>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card>
+    <div class="tournament-detail-card-content">
+      <h2>Información sobre su realización</h2>
+
+      <div class="tournament-location-time">
+        <p>Lugares disponibles:</p>
+        <ul>
+          <li *ngFor="let place of tournament?.places">{{place.name}}</li>
+        </ul>
+
+        <p>Periodo de juegos: {{tournament?.dates?.init}} - {{tournament?.dates?.final}}</p>
+        <p>Horario base: {{tournament?.hours}}</p>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card>
+    <div class="tournament-detail-card-content">
+      <h2>Organizado por</h2>
+
+      <div class="tournament-officials">
+        <div>
+          <p>Administradores:</p>
+          <ul>
+            <li *ngFor="let admin of tournament?.officials?.admins">{{admin.name}}</li>
+          </ul>
+        </div>
+        <div>
+          <p>Entrenadores:</p>
+          <ul>
+            <li *ngFor="let coach of tournament?.officials?.coaches">{{coach.name}}</li>
+          </ul>
+        </div>
+        <div>
+          <p>Árbitros:</p>
+          <ul>
+            <li *ngFor="let referee of tournament?.officials?.referees">{{referee.name}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card>
+    <div class="tournament-detail-card-content">
+      <h2>Partidos...</h2>
+
+      <div class="tournament-officials">
+        <mat-chip-list aria-label="Mixed categories">
+          <mat-chip *ngFor="let category of tournament?.mixedCategories" selected="{{ category.status === 'active' }}">{{category.name}}</mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+  </mat-card>
+</div>

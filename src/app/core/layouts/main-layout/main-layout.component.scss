@@ -3,20 +3,34 @@
   height: 100vh;
   justify-content: center;
   overflow: hidden;
-  width: 100vw;
+  width: 100%;
 }
 
 .layout {
   display: grid;
   grid-template-columns: 64px calc(100% - 64px);
-  width: 100%;
-  min-height: 100%;
+  height: 100%;
   overflow: hidden;
+  width: 100%;
 }
 
 .main-content {
-  padding: 3em 48px;
+  padding: 3em;
   overflow-y: auto;
   overflow-x: hidden;
-  width: calc(100% - 48px - 48px);
+  width: calc(100% - 3em - 3em);
+}
+
+@media (max-width: 767px) {
+  .layout {
+    display: flex;
+  }
+
+  .main-content {
+    padding: 2em;
+    padding-bottom: 6em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: calc(100% - 2em - 2em);
+  }
 }

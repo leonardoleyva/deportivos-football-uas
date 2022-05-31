@@ -10,6 +10,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,6 +46,8 @@ import { TournamentDetailComponent } from './modules/admin/pages/tournament-deta
     MatDatepickerModule,
     MatIconModule,
     MatSnackBarModule,
+    MatCardModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

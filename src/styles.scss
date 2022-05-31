@@ -43,6 +43,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 2rem;
   font-weight: 500;
   line-height: 38px;
+  margin: 0px;
 }
 
 .mat-raised-button.mat-primary {
@@ -53,11 +54,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border: 1px solid #0A90EF;
 }
 
+.mat-standard-chip {
+  cursor: pointer !important;
+}
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+  background-color: #0A90EF;
+  color: #ffffff;
+}
+
 .snack-bar-success {
   background-color: #10B981;
   color: #ffffff;
 
   & .mat-button-wrapper {
     color: #ffffff;
+  }
+}
+
+@media (max-width: 767px) {
+  .mat-typography h1 {
+    font-size: 1.5rem;
   }
 }
