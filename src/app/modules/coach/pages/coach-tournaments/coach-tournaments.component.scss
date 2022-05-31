@@ -1,0 +1,36 @@
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 320px;
+}
+
+.filters-container {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+table {
+  width: 100%;
+  min-width: 768px;
+}
+
+.table-container {
+  width: 100%;
+  overflow: auto;
+}
+
+.mat-row:hover .mat-cell {
+  background: rgba(38, 39, 43, 0.1);
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .search-input {
+    max-width: 100%;
+  }
+}
