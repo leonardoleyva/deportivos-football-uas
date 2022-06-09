@@ -29,6 +29,7 @@ import { CoachTournamentCategoriesComponent } from './modules/coach/pages/coach-
 import { CreateTeamComponent } from './modules/coach/pages/create-team/create-team.component';
 import { TeamCardComponent } from './shared/components/team-card/team-card.component';
 import { RefereeTournamentsComponent } from './modules/referee/pages/referee-tournaments/referee-tournaments.component';
+import { RefereeTournamentCategoriesComponent } from './modules/referee/pages/referee-tournament-categories/referee-tournament-categories.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { RefereeTournamentsComponent } from './modules/referee/pages/referee-tou
     CreateTeamComponent,
     TeamCardComponent,
     RefereeTournamentsComponent,
+    RefereeTournamentCategoriesComponent,
   ],
   imports: [
     BrowserModule,

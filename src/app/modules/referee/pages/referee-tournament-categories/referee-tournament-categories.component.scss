@@ -1,0 +1,8 @@
+.subtitle {
+  margin: 1.5em 0em;
+  color: rgba(38, 39, 43, 0.5);
+
+  & > span {
+    color: #0A90EF;
+  }
+}

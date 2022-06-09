@@ -35,6 +35,6 @@ export class RefereeTournamentsComponent implements OnInit {
   }
 
   handleClick({ _id }: Tournament) {
-    this.route.navigate([`/coach/tournament/${_id}/categories`]);
+    this.route.navigate([`/referee/tournament/${_id}/categories`]);
   }
 }

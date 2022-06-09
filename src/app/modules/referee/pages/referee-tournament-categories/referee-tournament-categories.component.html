@@ -1,0 +1,11 @@
+<h1>Categorías del torneo: {{tournament?.name}}</h1>
+
+<p class="subtitle">Revela cualquier historial de un <span>torneo</span> en alguna de las siguiente categorías</p>
+
+<mat-card>
+  <mat-chip-list aria-label="Mixed categories">
+    <a *ngFor="let category of tournament?.mixedCategories" [routerLink]="['/referee/tournament/' + tournamentIdParam + '/category/' + category._id + '/history']">
+      <mat-chip selected="{{ category.status === 'active' }}">{{category.name}}</mat-chip>
+    </a>
+  </mat-chip-list>
+</mat-card>

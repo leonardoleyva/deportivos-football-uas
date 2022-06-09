@@ -8,6 +8,7 @@ import { TournamentsComponent } from './modules/admin/pages/tournaments/tourname
 import { CoachTournamentCategoriesComponent } from './modules/coach/pages/coach-tournament-categories/coach-tournament-categories.component';
 import { CoachTournamentsComponent } from './modules/coach/pages/coach-tournaments/coach-tournaments.component';
 import { CreateTeamComponent } from './modules/coach/pages/create-team/create-team.component';
+import { RefereeTournamentCategoriesComponent } from './modules/referee/pages/referee-tournament-categories/referee-tournament-categories.component';
 import { RefereeTournamentsComponent } from './modules/referee/pages/referee-tournaments/referee-tournaments.component';
 
 const routes: Routes = [
@@ -46,7 +47,7 @@ const routes: Routes = [
       { path: 'tournaments', component: RefereeTournamentsComponent },
       {
         path: 'tournament/:id/categories',
-        component: CoachTournamentCategoriesComponent,
+        component: RefereeTournamentCategoriesComponent,
       },
       { path: '**', redirectTo: 'tournaments' },
     ],
