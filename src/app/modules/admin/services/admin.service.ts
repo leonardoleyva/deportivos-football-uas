@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Place, Team, Tournament } from 'src/app/shared/tournament';
+import {
+  Place,
+  Team,
+  Tournament,
+  TournamentMatch,
+} from 'src/app/shared/tournament';
 import { environment } from 'src/environments/environment';
 import {
   CreateTournamentPayload,
@@ -64,6 +69,26 @@ export class AdminService {
   getTeams(tournamentId: string, mixedCategoryId: string): Observable<Team[]> {
     return this.http.get<Team[]>(
       `${environment.API_URL}/coach/tournament/${tournamentId}/category/${mixedCategoryId}/teams`
+    );
+  }
+
+  getTournamentMatchesByCategory(
+    tournamentId: string,
+    categoryId: string
+  ): Observable<TournamentMatch> {
+    return this.http.get<TournamentMatch>(
+      `${this._API_URL_SERVICE_MODULE}/tournament/${tournamentId}/category/${categoryId}/matches`
+    );
+  }
+
+  setTournamentMatchesByCategory(
+    tournamentId: string,
+    categoryId: string,
+    teamsIds: string[]
+  ): Observable<TournamentMatch> {
+    return this.http.post<TournamentMatch>(
+      `${this._API_URL_SERVICE_MODULE}/tournament/${tournamentId}/category/${categoryId}/matches`,
+      { teamsIds }
     );
   }
 }

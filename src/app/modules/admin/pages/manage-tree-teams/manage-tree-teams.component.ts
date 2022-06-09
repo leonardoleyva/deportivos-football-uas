@@ -4,12 +4,14 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {
   Team,
   Tournament,
   TournamentCategory,
+  TournamentMatch,
 } from 'src/app/shared/tournament';
 import { AdminService } from '../../services/admin.service';
 
@@ -23,22 +25,29 @@ export class ManageTreeTeamsComponent implements OnInit, OnDestroy {
   categoryIdParam: string;
   category: TournamentCategory | undefined;
   teams: Team[] = [];
+  loading: boolean = true;
+  tournamentMatch: TournamentMatch | null = null;
   // The next two states are available teams to apply drag and drop
   teamsReadyToPlay: Team[] = [];
   selectedTeams: (Team & { opponent?: string })[] = [];
 
   tournamentSubscription: Subscription | undefined;
   teamsSubscription: Subscription | undefined;
+  matchesSubscription: Subscription | undefined;
+  createMatchesSubscription: Subscription | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private snackBar: MatSnackBar
   ) {
     this.tournamentIdParam = this.route.snapshot.paramMap.get('id') ?? '';
     this.categoryIdParam = this.route.snapshot.paramMap.get('categoryId') ?? '';
   }
 
   ngOnInit(): void {
+    this.fetchMatches();
+
     this.tournamentSubscription = this.adminService
       .getOneTournament(this.tournamentIdParam)
       .subscribe((data: Tournament) => {
@@ -58,6 +67,8 @@ export class ManageTreeTeamsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.tournamentSubscription?.unsubscribe();
     this.teamsSubscription?.unsubscribe();
+    this.createMatchesSubscription?.unsubscribe();
+    this.matchesSubscription?.unsubscribe();
   }
 
   drop(event: CdkDragDrop<Team[]>) {
@@ -89,5 +100,44 @@ export class ManageTreeTeamsComponent implements OnInit, OnDestroy {
       }
       this.selectedTeams[index].opponent = this.selectedTeams[index - 1].name;
     }
+  }
+
+  fetchMatches() {
+    this.matchesSubscription = this.adminService.getTournamentMatchesByCategory(
+      this.tournamentIdParam,
+      this.categoryIdParam
+    ).subscribe((data: TournamentMatch) => {
+      this.tournamentMatch = data;
+      this.loading = false;
+    });
+  }
+
+  isSubmitMatchesDisabled() {
+    return !(
+      this.selectedTeams.length === 4 ||
+      this.selectedTeams.length === 8 ||
+      this.selectedTeams.length === 16
+    );
+  }
+
+  handleSubmitMatches() {
+    const teamsIds = this.selectedTeams.map((team) => team._id);
+
+    this.createMatchesSubscription = this.adminService
+      .setTournamentMatchesByCategory(
+        this.tournamentIdParam,
+        this.categoryIdParam,
+        teamsIds
+      )
+      .subscribe(() => {
+        this.snackBar.open('Partidos generados exitosamente', 'X', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snack-bar-success'],
+        });
+
+        this.fetchMatches();
+      });
   }
 }
