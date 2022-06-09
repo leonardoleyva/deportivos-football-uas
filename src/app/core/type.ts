@@ -1,0 +1,1 @@
+export type UrlPathRole = 'admin' | 'coach' | 'referee'
