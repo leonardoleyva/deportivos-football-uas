@@ -10,6 +10,7 @@ import { CoachTournamentsComponent } from './modules/coach/pages/coach-tournamen
 import { CreateTeamComponent } from './modules/coach/pages/create-team/create-team.component';
 import { RefereeTournamentCategoriesComponent } from './modules/referee/pages/referee-tournament-categories/referee-tournament-categories.component';
 import { RefereeTournamentsComponent } from './modules/referee/pages/referee-tournaments/referee-tournaments.component';
+import { TournamentHistoryComponent } from './modules/referee/pages/tournament-history/tournament-history.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
       {
         path: 'tournament/:id/categories',
         component: RefereeTournamentCategoriesComponent,
+      },
+      {
+        path: 'tournament/:id/category/:categoryId/history',
+        component: TournamentHistoryComponent,
       },
       { path: '**', redirectTo: 'tournaments' },
     ],
