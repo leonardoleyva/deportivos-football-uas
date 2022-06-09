@@ -32,6 +32,7 @@ import { TeamCardComponent } from './shared/components/team-card/team-card.compo
 import { RefereeTournamentsComponent } from './modules/referee/pages/referee-tournaments/referee-tournaments.component';
 import { RefereeTournamentCategoriesComponent } from './modules/referee/pages/referee-tournament-categories/referee-tournament-categories.component';
 import { TournamentHistoryComponent } from './modules/referee/pages/tournament-history/tournament-history.component';
+import { ManageMatchScoreComponent } from './modules/referee/pages/manage-match-score/manage-match-score.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { TournamentHistoryComponent } from './modules/referee/pages/tournament-h
     RefereeTournamentsComponent,
     RefereeTournamentCategoriesComponent,
     TournamentHistoryComponent,
+    ManageMatchScoreComponent,
   ],
   imports: [
     BrowserModule,

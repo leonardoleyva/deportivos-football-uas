@@ -67,7 +67,7 @@ export class TournamentHistoryComponent implements OnInit {
 
   handleNavigateToMatchScore(match: TeamOnMatch[]) {
     this.route.navigate([
-      `/referee/tournament/${this.tournamentIdParam}/category/${this.categoryIdParam}/match/${match[0]._id}-${match[1]._id}/score`,
+      `/referee/tournament/${this.tournamentIdParam}/category/${this.categoryIdParam}/match/${match[0]._id}---${match[1]._id}/score`,
     ]);
   }
 }
