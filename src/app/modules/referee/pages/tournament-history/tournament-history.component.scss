@@ -1,0 +1,77 @@
+.subtitle {
+  color: #0A90EF;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 23px;
+  margin: 1.25em 0em;
+}
+
+.stage-matches {
+  margin-bottom: 4em;
+}
+
+.matches {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  height: fit-content;
+  width: 100%;
+  overflow: auto;
+}
+
+.match {
+  display: grid;
+  grid-template-columns: calc(50% - 60px) 120px calc(50% - 60px);
+  min-width: 720px;
+  cursor: pointer;
+
+  & .match-team {
+    align-items: center;
+    background-color: #26272B;
+    color: #ffffff;
+    display: flex;
+    gap: 20px;
+    height: 80px;
+    width: calc(100% - 2em);
+    border-radius: 6px;
+
+    & > img {
+      width: 64px;
+      height: 80%;
+      margin: 0;
+    }
+
+    & > p {
+      margin: 0;
+    }
+  }
+
+  & .match-team-left {
+    flex-direction: row;
+    padding-left: 2em;
+  }
+
+  & .match-team-right {
+    flex-direction: row-reverse;
+    padding-right: 2em;
+  }
+}
+
+.match-score {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+
+  & > p {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    margin: 0;
+  }
+}
+
+.match-score-winner {
+  color: #0A90EF;
+}

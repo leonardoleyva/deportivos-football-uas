@@ -1,7 +1,7 @@
 <div class="header">
   <h1>Partidos de la categoría: {{category?.name}}</h1>
   
-  <button *ngIf="!tournamentMatch?._id && !loading" mat-raised-button color="primary" [disabled]="isSubmitMatchesDisabled()" (click)="handleSubmitMatches()">Generar partidos</button>
+  <button *ngIf="!tournamentMatch?._id && !isTournamentMatchLoading" mat-raised-button color="primary" [disabled]="isSubmitMatchesDisabled()" (click)="handleSubmitMatches()">Generar partidos</button>
 </div>
 
 <div class="tournament-tree">
@@ -9,7 +9,7 @@
   #readyToPlay="cdkDropList"
   [cdkDropListData]="teamsReadyToPlay"
   [cdkDropListConnectedTo]="[selected]" class="teams-to-drag-and-drop"
-  [ngClass]="{'teams-to-drag-and-drop-hidden': loading || tournamentMatch?._id}" (cdkDropListDropped)="drop($event)">
+  [ngClass]="{'teams-to-drag-and-drop-hidden': isTournamentMatchLoading || tournamentMatch?._id}" (cdkDropListDropped)="drop($event)">
     <app-team-card *ngFor="let team of teamsReadyToPlay" [teamId]="team._id" [name]="team.name" [logo]="team.teamLogo" cdkDrag></app-team-card>
   </div>
   
@@ -17,7 +17,7 @@
     #selected="cdkDropList"
     [cdkDropListData]="selectedTeams"
     [cdkDropListConnectedTo]="[readyToPlay]" class="teams-to-drag-and-drop"
-    [ngClass]="{'teams-to-drag-and-drop-hidden': loading || tournamentMatch?._id}" (cdkDropListDropped)="drop($event)">
+    [ngClass]="{'teams-to-drag-and-drop-hidden': isTournamentMatchLoading || tournamentMatch?._id}" (cdkDropListDropped)="drop($event)">
       <app-team-card *ngFor="let team of selectedTeams" [teamId]="team._id" [name]="team.name" [logo]="team.teamLogo" [hasOpponent]="true" [opponent]="team.opponent ?? ''" cdkDrag></app-team-card>
   </div>
 

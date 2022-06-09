@@ -1,1 +1,114 @@
-<h1>Historial de partidos: Champions League</h1>
+<header>
+  <h1>Historial de partidos: {{tournament?.name}}</h1>
+
+  <p class="subtitle">Equipos de la categoría: {{getCategory()}}</p>
+</header>
+
+<div class="history">
+  <div *ngIf="tournamentMatch?.final" class="stage-matches">
+    <h2 class="subtitle">Gran final</h2>
+
+    <mat-card>
+      <div class="matches">
+        <div *ngFor="let match of tournamentMatch?.final?.matches" class="match">
+          <div class="match-team match-team-left">
+            <img [src]="match[0].teamLogo" alt="Logo of {{match[0].name}} team">
+            <p>{{match[0].name}}</p>
+          </div>
+          <div class="match-score">
+            <p *ngIf="match[0].goals || match[1].goals">
+              <span [ngClass]="{'match-score-winner': match[0].status === 'winner'}">{{match[0].goals}}</span> - <span [ngClass]="{'match-score-winner': match[1].status === 'winner'}">{{match[1].goals}}</span>
+            </p>
+            <p *ngIf="!match[0].goals && !match[1].goals">
+              VS
+            </p>
+          </div>
+          <div class="match-team match-team-right">
+            <img [src]="match[1].teamLogo" alt="Logo of {{match[1].name}} team">
+            <p>{{match[1].name}}</p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <div *ngIf="tournamentMatch?.semiFinal" class="stage-matches">
+    <h2 class="subtitle">Semi-final</h2>
+    <mat-card>
+      <div class="matches">
+          <div *ngFor="let match of tournamentMatch?.semiFinal?.matches" class="match" (click)="handleNavigateToMatchScore(match)">
+            <div class="match-team match-team-left">
+              <img [src]="match[0].teamLogo" alt="Logo of {{match[0].name}} team">
+              <p>{{match[0].name}}</p>
+            </div>
+            <div class="match-score">
+              <p *ngIf="match[0].goals || match[1].goals">
+                <span [ngClass]="{'match-score-winner': match[0].status === 'winner'}">{{match[0].goals}}</span> - <span [ngClass]="{'match-score-winner': match[1].status === 'winner'}">{{match[1].goals}}</span>
+              </p>
+              <p *ngIf="!match[0].goals && !match[1].goals">
+                VS
+              </p>
+            </div>
+            <div class="match-team match-team-right">
+              <img [src]="match[1].teamLogo" alt="Logo of {{match[1].name}} team">
+              <p>{{match[1].name}}</p>
+            </div>
+          </div>
+      </div>
+    </mat-card>
+  </div>
+  
+  <div *ngIf="tournamentMatch?.quartersFinal" class="stage-matches">
+    <h2 class="subtitle">Cuartos de final</h2>
+
+    <mat-card>
+      <div class="matches">
+        <div *ngFor="let match of tournamentMatch?.quartersFinal?.matches" class="match">
+          <div class="match-team match-team-left">
+            <img [src]="match[0].teamLogo" alt="Logo of {{match[0].name}} team">
+            <p>{{match[0].name}}</p>
+          </div>
+          <div class="match-score">
+            <p *ngIf="match[0].goals || match[1].goals">
+              <span [ngClass]="{'match-score-winner': match[0].status === 'winner'}">{{match[0].goals}}</span> - <span [ngClass]="{'match-score-winner': match[1].status === 'winner'}">{{match[1].goals}}</span>
+            </p>
+            <p *ngIf="!match[0].goals && !match[1].goals">
+              VS
+            </p>
+          </div>
+          <div class="match-team match-team-right">
+            <img [src]="match[1].teamLogo" alt="Logo of {{match[1].name}} team">
+            <p>{{match[1].name}}</p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <div *ngIf="tournamentMatch?.top16" class="stage-matches">
+    <h2 class="subtitle">Octavos de final</h2>
+
+    <mat-card>
+      <div class="matches">
+        <div *ngFor="let match of tournamentMatch?.top16?.matches" class="match">
+          <div class="match-team match-team-left">
+            <img [src]="match[0].teamLogo" alt="Logo of {{match[0].name}} team">
+            <p>{{match[0].name}}</p>
+          </div>
+          <div class="match-score">
+            <p *ngIf="match[0].goals || match[1].goals">
+              <span [ngClass]="{'match-score-winner': match[0].status === 'winner'}">{{match[0].goals}}</span> - <span [ngClass]="{'match-score-winner': match[1].status === 'winner'}">{{match[1].goals}}</span>
+            </p>
+            <p *ngIf="!match[0].goals && !match[1].goals">
+              VS
+            </p>
+          </div>
+          <div class="match-team match-team-right">
+            <img [src]="match[1].teamLogo" alt="Logo of {{match[1].name}} team">
+            <p>{{match[1].name}}</p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

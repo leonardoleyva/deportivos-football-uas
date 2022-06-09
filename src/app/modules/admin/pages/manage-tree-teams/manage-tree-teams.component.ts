@@ -25,7 +25,7 @@ export class ManageTreeTeamsComponent implements OnInit, OnDestroy {
   categoryIdParam: string;
   category: TournamentCategory | undefined;
   teams: Team[] = [];
-  loading: boolean = true;
+  isTournamentMatchLoading: boolean = true;
   tournamentMatch: TournamentMatch | null = null;
   // The next two states are available teams to apply drag and drop
   teamsReadyToPlay: Team[] = [];
@@ -108,7 +108,7 @@ export class ManageTreeTeamsComponent implements OnInit, OnDestroy {
       this.categoryIdParam
     ).subscribe((data: TournamentMatch) => {
       this.tournamentMatch = data;
-      this.loading = false;
+      this.isTournamentMatchLoading = false;
     });
   }
 
