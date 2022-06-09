@@ -1,6 +1,9 @@
 <div class="team-card" (click)="handleClick()">
   <div class="team-card-content">
     <img [src]="logo" alt="Team logo">
-    <p>{{name}}</p>
+    <div class="versus">
+      <p>{{name}}</p>
+      <p *ngIf="hasOpponent" class="opponent">{{!opponent ? 'Esperando oponente...' : 'vs ' + opponent}}</p>
+    </div>
   </div>
 </div>

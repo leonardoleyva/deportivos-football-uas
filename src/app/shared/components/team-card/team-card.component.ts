@@ -9,6 +9,8 @@ export class TeamCardComponent implements OnInit {
   @Input() teamId: string = '';
   @Input() name: string = '';
   @Input() logo: string = '';
+  @Input() hasOpponent: boolean = false;
+  @Input() opponent: string = '';
   @Output() onClick = new EventEmitter<string>();
 
   constructor() {}

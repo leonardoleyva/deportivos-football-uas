@@ -1,3 +1,8 @@
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -17,7 +22,10 @@ export class ManageTreeTeamsComponent implements OnInit, OnDestroy {
   tournamentIdParam: string;
   categoryIdParam: string;
   category: TournamentCategory | undefined;
-  teams: Team[] | undefined;
+  teams: Team[] = [];
+  // The next two states are available teams to apply drag and drop
+  teamsReadyToPlay: Team[] = [];
+  selectedTeams: (Team & { opponent?: string })[] = [];
 
   tournamentSubscription: Subscription | undefined;
   teamsSubscription: Subscription | undefined;
@@ -39,15 +47,47 @@ export class ManageTreeTeamsComponent implements OnInit, OnDestroy {
         );
       });
 
-    this.tournamentSubscription = this.adminService
+    this.teamsSubscription = this.adminService
       .getTeams(this.tournamentIdParam, this.categoryIdParam)
       .subscribe((data: Team[]) => {
         this.teams = data;
+        this.teamsReadyToPlay = data;
       });
   }
 
   ngOnDestroy(): void {
     this.tournamentSubscription?.unsubscribe();
     this.teamsSubscription?.unsubscribe();
+  }
+
+  drop(event: CdkDragDrop<Team[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+
+    for (let i in this.selectedTeams) {
+      const index = parseInt(i);
+      if (index % 2 === 0) {
+        if (index === this.selectedTeams.length - 1) {
+          this.selectedTeams[index].opponent = '';
+          continue;
+        }
+
+        this.selectedTeams[index].opponent = this.selectedTeams[index + 1].name;
+        continue;
+      }
+      this.selectedTeams[index].opponent = this.selectedTeams[index - 1].name;
+    }
   }
 }

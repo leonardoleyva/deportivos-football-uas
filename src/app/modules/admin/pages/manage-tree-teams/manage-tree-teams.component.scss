@@ -1,3 +1,11 @@
+.header {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+}
+
 .tournament-tree {
   display: flex;
   gap: 40px;
@@ -8,6 +16,9 @@
 
 .teams-to-drag-and-drop {
   border: 2px dashed #0A90EF;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   height: 560px;
   max-height: 560px;
   min-width: calc(320px - 1.25em - 1.25em);
