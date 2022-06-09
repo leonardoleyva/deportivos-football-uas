@@ -63,7 +63,7 @@ export interface Tournament {
 export interface Player {
   readonly _id: string
   readonly name: string
-  readonly curp: String
+  readonly curp: string
   readonly playerNumber: number
 }
 

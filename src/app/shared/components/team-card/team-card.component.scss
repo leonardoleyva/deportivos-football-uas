@@ -1,0 +1,31 @@
+.team-card {
+  background-color: rgba(38, 39, 43, 0.25);
+  box-shadow: 0px 4px 4px rgba(38, 39, 43, 0.25);
+  height: calc(72px - 1.25em - 1.25em);
+  padding: 1.25em;
+  width: calc(100% - 1.25em - 1.25em);
+}
+
+.team-card-content {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  height: 100%;
+  max-width: 100%;
+  width: 100%;
+
+  & > img {
+    border: 1px solid #FFFFFF;
+    border-radius: 4px;
+    height: 100%;
+    width: 40px;
+  }
+
+  & > p {
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 23px;
+    margin: 0;
+  }
+}

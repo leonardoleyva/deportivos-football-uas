@@ -4,7 +4,7 @@
 
 <mat-card>
   <mat-chip-list aria-label="Mixed categories">
-    <a *ngFor="let category of tournament?.mixedCategories" [routerLink]="['/admin/tournament/' + tournamentIdParam + '/category/' + category._id + '/team/create']">
+    <a *ngFor="let category of tournament?.mixedCategories" [routerLink]="['/coach/tournament/' + tournamentIdParam + '/category/' + category._id + '/team/create']">
       <mat-chip selected="{{ category.status === 'active' }}">{{category.name}}</mat-chip>
     </a>
   </mat-chip-list>

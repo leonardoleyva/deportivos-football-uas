@@ -1,0 +1,75 @@
+<header>
+  <h1>Torneo: {{tournament?.name}}</h1>
+
+  <p class="subtitle">Equipos de la categoría: {{getCategory()}}</p>
+</header>
+
+<div class="create-team-container">
+  <div class="teams-list">
+    <app-team-card *ngFor="let team of teams" [teamId]="team._id" [name]="team.name" [logo]="team.teamLogo"></app-team-card>
+  </div>
+  <mat-card>
+    <div class="form">
+      <div class="create-team-form">
+        <h2>Información base del equipo</h2>
+        
+        <div>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>Nombre del equipo</mat-label>
+            <input matInput placeholder="" [(ngModel)]="teamForm.name">
+          </mat-form-field>
+          <div class="images-uploader" [ngClass]="{
+            'images-uploader-active': teamForm.logo
+          }">
+            <input type="file" accept="image/png, image/jpeg" (change)="handleUpTeamLogo($event)" />
+            <img src="assets/images/preview-up-img.png" alt="Image icon to upload a team logo">
+          </div>
+        </div>
+      </div>
+
+      <div class="add-player-form">
+        <h2>Únete y anota goles con el nuevo equipo estrella del torneo</h2>
+
+        <div class="player-inputs-container">
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>Nombre del jugador</mat-label>
+            <input #playerFormInputName matInput placeholder="" [(ngModel)]="playerForm.name">
+          </mat-form-field>
+
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>CURP</mat-label>
+            <input matInput placeholder="" [(ngModel)]="playerForm.curp">
+          </mat-form-field>
+
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>Número del jugador</mat-label>
+            <input type="number" matInput placeholder="" [(ngModel)]="playerForm.playerNumber">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="add-player-button-container">
+        <p>Agregar jugador</p>
+        <button [disabled]="isAddPlayerDisabled()" mat-mini-fab color="primary" aria-label="Icon button to add a player" (click)="handleAddPlayer()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+      <ul class="players-list">
+        <li *ngFor="let player of playersList">
+          <div class="player">
+            <p>{{player.name}}</p>
+            <p>{{player.playerNumber}}</p>
+            <button class="delete-player-icon" mat-mini-fab color="warn" aria-label="Icon button to delete a player from the players list" (click)="handleRemovePlayer(player.playerNumber)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </li>
+      </ul>
+
+      <div class="register-team-button-container">
+        <button mat-raised-button color="primary" [disabled]="isSubmitTeamDisabled()" (click)="handleSubmitTeam()">Registrar equipo</button>
+      </div>
+    </div>
+  </mat-card>
+</div>

@@ -26,6 +26,8 @@ import { EditTournamentComponent } from './modules/admin/pages/edit-tournament/e
 import { ManageTreeTeamsComponent } from './modules/admin/pages/manage-tree-teams/manage-tree-teams.component';
 import { CoachTournamentsComponent } from './modules/coach/pages/coach-tournaments/coach-tournaments.component';
 import { CoachTournamentCategoriesComponent } from './modules/coach/pages/coach-tournament-categories/coach-tournament-categories.component';
+import { CreateTeamComponent } from './modules/coach/pages/create-team/create-team.component';
+import { TeamCardComponent } from './shared/components/team-card/team-card.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { CoachTournamentCategoriesComponent } from './modules/coach/pages/coach-
     ManageTreeTeamsComponent,
     CoachTournamentsComponent,
     CoachTournamentCategoriesComponent,
+    CreateTeamComponent,
+    TeamCardComponent,
   ],
   imports: [
     BrowserModule,
