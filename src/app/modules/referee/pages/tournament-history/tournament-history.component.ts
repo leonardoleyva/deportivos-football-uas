@@ -6,6 +6,7 @@ import {
   TeamOnMatch,
   Tournament,
   TournamentMatch,
+  TournamentStage,
 } from 'src/app/shared/tournament';
 
 @Component({
@@ -65,7 +66,9 @@ export class TournamentHistoryComponent implements OnInit {
     )?.name;
   }
 
-  handleNavigateToMatchScore(match: TeamOnMatch[]) {
+  handleNavigateToMatchScore(match: TeamOnMatch[], stage: TournamentStage) {
+    if (stage !== this.tournamentMatch?.currentStage) return;
+
     this.route.navigate([
       `/referee/tournament/${this.tournamentIdParam}/category/${this.categoryIdParam}/match/${match[0]._id}---${match[1]._id}/score`,
     ]);

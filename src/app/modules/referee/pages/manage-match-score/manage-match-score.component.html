@@ -1,1 +1,44 @@
-<p>manage-match-score works!</p>
+<h1>Gestión de resultados: {{tournament?.name}}</h1>
+
+<div class="section-container">
+  <div class="match">
+    <div class="match-team match-team-left" (click)="incrementTeamOneScore()">
+      <img [src]="match[0].teamLogo" alt="Logo of {{match[0]?.name}} team">
+      <p>{{match[0].name}}</p>
+    </div>
+    <div class="match-score">
+      <div>
+        <p>
+          <span [ngClass]="{'match-score-winner': match[0].status === 'winner'}">{{scores.teamOne}}</span> - <span [ngClass]="{'match-score-winner': match[1].status === 'winner'}">{{scores.teamTwo}}</span>
+        </p>
+        <button class="decrement-score" mat-mini-fab color="warn" aria-label="Icon button to decrement score of team one" (click)="decrementTeamOneScore()">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button class="decrement-score" mat-mini-fab color="warn" aria-label="Icon button to decrement score of team two" (click)="decrementTeamTwoScore()">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="match-team match-team-right" (click)="incrementTeamTwoScore()">
+      <img [src]="match[1].teamLogo" alt="Logo of {{match[1].name}} team">
+      <p>{{match[1].name}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="save-goals-container">
+  <button mat-raised-button color="primary" (click)="handleSubmitGoals()">Guardar goles</button>
+</div>
+
+<hr class="divider" />
+
+<mat-card>
+  <div class="information-finish-match">
+    <p>Para dar clausura a este partido, debe revisar minuciosamente el marcador. Una vez registrado y terminado el partido será imposible  cambiar el resultado.</p>
+    <p>Para continuar, de click en el botón “Finalizar”.</p>
+
+    <div>
+      <button mat-raised-button color="primary" (click)="handleSubmitFinishMatch()">Finalizar</button>
+    </div>
+  </div>
+</mat-card>
