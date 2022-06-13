@@ -1,13 +1,13 @@
 <aside class="root">
   <nav class="navigation">
     <a [routerLink]="['/admin/tournaments']">
-      <img src="{{isAdminActive ? 'assets/images/selected-admin-icon.png': 'assets/images/unselected-admin-icon.png'}}" />
+      <img src="{{isAdminActive ? 'assets/images/selected-admin-icon.png': 'assets/images/unselected-admin-icon.png'}}" alt="Icon button of tournament administrators" />
     </a>
     <a [routerLink]="['/coach/tournaments']">
-      <img src="{{isCoachActive ? 'assets/images/selected-coach-icon.png': 'assets/images/unselected-coach-icon.png'}}" />
+      <img src="{{isCoachActive ? 'assets/images/selected-coach-icon.png': 'assets/images/unselected-coach-icon.png'}}" alt="Icon button of tournament coaches" />
     </a>
     <a [routerLink]="['/referee/tournaments']">
-      <img src="{{isRefereeActive ? 'assets/images/selected-referee-icon.png': 'assets/images/unselected-referee-icon.png'}}" />
+      <img src="{{isRefereeActive ? 'assets/images/selected-referee-icon.png': 'assets/images/unselected-referee-icon.png'}}" alt="Icon button of tournament referees" />
     </a>
   </nav>
 </aside>
